@@ -49,7 +49,7 @@ class RandomAffine(object):
     def __call__(self, img, bboxes):
         if random.random() < self.p:
             h_img, w_img, _ = img.shape
-            # 得到可以包含所有bbox的最大bbox
+
             max_bbox = np.concatenate([np.min(bboxes[:, 0:2], axis=0), np.max(bboxes[:, 2:4], axis=0)], axis=-1)
             max_l_trans = max_bbox[0]
             max_u_trans = max_bbox[1]

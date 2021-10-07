@@ -149,7 +149,7 @@ class VocDataset(Dataset):
                     '''
                     Testing code 
                     '''
-                    bbox_ind = int(bbox_count[i] % 150)  # BUG : 150为一个先验值,内存消耗大
+                    bbox_ind = int(bbox_count[i] % 150)  # BUG : 150
                     bboxes_xywh[i][bbox_ind, :4] = box_xywh
                     bbox_count[i] += 1
 
