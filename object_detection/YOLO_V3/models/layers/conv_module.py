@@ -39,7 +39,7 @@ class Convolutional(nn.Module):
 
     def forward(self, x):
         x = self.__conv(x)
-        if self.norm:
+        if self.batch_norm:
             x = self.__norm(x)
         if self.activate:
             x = self.__activate(x)
