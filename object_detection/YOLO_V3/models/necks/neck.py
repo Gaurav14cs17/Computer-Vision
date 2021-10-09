@@ -103,13 +103,12 @@ class Feature_block(nn.Module):
             else:
                 self.__out_channels = self.__out_channels // 2
             flag = flag ^ 1
-
+        self.my_block = nn.Sequential(*self.model_list)
         self.last_layer = Convolutional(self.__in_channels, feature_output_channels, kernel_size=1,
                                         stride=1, padding=0, batch_norm='bn', activate='leaky')
 
     def forward(self, x):
-        for layer in self.model_list:
-            x = layer(x)
+        x = self.my_block(x)
         x = self.last_layer(x)
         return x
 
@@ -120,11 +119,13 @@ if __name__ == '__main__':
     model = Get_block(54, 128, 53)
     model_1 = Feature_block(54, 128, 53)
     image = torch.randn((1, 54, 50, 50))
+    image_1 = image.clone()
     # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # image = image.to(device)
     # model.cuda()
     # summary(model, (54, 50, 50))
     output = model(image)
-    output_1 = model_1(image)
+    print(torch.equal(image_1, image))
+    output_1 = model_1(image_1)
     print("\n\n")
-    print(output.shape)
+    print(output.shape , output_1.shape)
