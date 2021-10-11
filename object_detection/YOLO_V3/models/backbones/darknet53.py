@@ -7,19 +7,19 @@ class Darknet53(nn.Module):
 
     def __init__(self):
         super(Darknet53, self).__init__()
-        self.__conv = Convolutional(filters_in=3, filters_out=32, kernel_size=3, stride=1, pad=1, norm='bn',
+        self.__conv = Convolutional(filters_in=3, filters_out=32, kernel_size=3, stride=1, padding=1, batch_norm='bn',
                                     activate='leaky')
 
-        self.__conv_5_0 = Convolutional(filters_in=32, filters_out=64, kernel_size=3, stride=2, pad=1, norm='bn',
+        self.__conv_5_0 = Convolutional(filters_in=32, filters_out=64, kernel_size=3, stride=2, padding=1, batch_norm='bn',
                                         activate='leaky')
         self.__rb_5_0 = Residual_block(filters_in=64, filters_out=64, filters_medium=32)
 
-        self.__conv_5_1 = Convolutional(filters_in=64, filters_out=128, kernel_size=3, stride=2, pad=1, norm='bn',
+        self.__conv_5_1 = Convolutional(filters_in=64, filters_out=128, kernel_size=3, stride=2, padding=1, batch_norm='bn',
                                         activate='leaky')
         self.__rb_5_1_0 = Residual_block(filters_in=128, filters_out=128, filters_medium=64)
         self.__rb_5_1_1 = Residual_block(filters_in=128, filters_out=128, filters_medium=64)
 
-        self.__conv_5_2 = Convolutional(filters_in=128, filters_out=256, kernel_size=3, stride=2, pad=1, norm='bn',
+        self.__conv_5_2 = Convolutional(filters_in=128, filters_out=256, kernel_size=3, stride=2, padding=1, batch_norm='bn',
                                         activate='leaky')
         self.__rb_5_2_0 = Residual_block(filters_in=256, filters_out=256, filters_medium=128)
         self.__rb_5_2_1 = Residual_block(filters_in=256, filters_out=256, filters_medium=128)
@@ -30,7 +30,7 @@ class Darknet53(nn.Module):
         self.__rb_5_2_6 = Residual_block(filters_in=256, filters_out=256, filters_medium=128)
         self.__rb_5_2_7 = Residual_block(filters_in=256, filters_out=256, filters_medium=128)
 
-        self.__conv_5_3 = Convolutional(filters_in=256, filters_out=512, kernel_size=3, stride=2, pad=1, norm='bn',
+        self.__conv_5_3 = Convolutional(filters_in=256, filters_out=512, kernel_size=3, stride=2, padding=1, batch_norm='bn',
                                         activate='leaky')
         self.__rb_5_3_0 = Residual_block(filters_in=512, filters_out=512, filters_medium=256)
         self.__rb_5_3_1 = Residual_block(filters_in=512, filters_out=512, filters_medium=256)
@@ -41,7 +41,7 @@ class Darknet53(nn.Module):
         self.__rb_5_3_6 = Residual_block(filters_in=512, filters_out=512, filters_medium=256)
         self.__rb_5_3_7 = Residual_block(filters_in=512, filters_out=512, filters_medium=256)
 
-        self.__conv_5_4 = Convolutional(filters_in=512, filters_out=1024, kernel_size=3, stride=2, pad=1, norm='bn',
+        self.__conv_5_4 = Convolutional(filters_in=512, filters_out=1024, kernel_size=3, stride=2, padding=1, batch_norm='bn',
                                         activate='leaky')
         self.__rb_5_4_0 = Residual_block(filters_in=1024, filters_out=1024, filters_medium=512)
         self.__rb_5_4_1 = Residual_block(filters_in=1024, filters_out=1024, filters_medium=512)

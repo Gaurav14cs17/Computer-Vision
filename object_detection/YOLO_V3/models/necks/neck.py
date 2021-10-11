@@ -111,7 +111,7 @@ class FPN_YOLO_V3(nn.Module):
         up_0 = self.__upsample1(c_1)
         merage_1 = self.__route1(x3, up_0)
         r2, small_output = self.neck_3(merage_1)
-        return [small_output, medium_output, large_output]
+        return small_output, medium_output, large_output
 
 
 if __name__ == '__main__':
