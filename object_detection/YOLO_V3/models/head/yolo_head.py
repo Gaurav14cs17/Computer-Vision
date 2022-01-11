@@ -7,7 +7,6 @@ class Yolo_head(nn.Module):
         super(Yolo_head, self).__init__()
         self.__anchors = anchors
         self.__nA = len(self.__anchors)
-
         self.__nC = nC
         self.__stride = stride
 

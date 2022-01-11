@@ -1,12 +1,9 @@
 import sys
-
 sys.path.append('..')
-
 import torch.nn as nn
 from models.backbones.darknet53 import Darknet53
 from models.necks.neck import FPN_YOLO_V3
 from models.head.yolo_head import Yolo_head
-
 from models.layers.conv_module import Convolutional
 import config.yolov3_config_voc as cfg
 import numpy as np
@@ -43,7 +40,6 @@ class YoloV3(nn.Module):
 
         if self.training:
             p, p_d = list(zip(*output))
-
             return p, p_d
         else:
             p, p_d = list(zip(*output))
@@ -64,11 +60,8 @@ class YoloV3(nn.Module):
 
 if __name__ == '__main__':
     net = YoloV3()
-    print(net)
-
     in_img = torch.randn(12, 3, 416, 416)
     p, p_d = net(in_img)
-
     for i in range(3):
         print(p[i].shape)
         print(p_d[i].shape)

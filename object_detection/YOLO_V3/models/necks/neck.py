@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import sys
 from pathlib import Path
+
 file = Path(__file__).resolve()
 print(file)
 parent, root = file.parent, file.parents[1]
@@ -16,6 +17,7 @@ class Upsample(nn.Module):
         super(Upsample, self).__init__()
         self.scale_factor = scale_factor
         self.mode = mode
+
     def forward(self, x):
         return F.interpolate(x, scale_factor=self.scale_factor, mode=self.mode)
 
@@ -23,6 +25,7 @@ class Upsample(nn.Module):
 class Route(nn.Module):
     def __init__(self):
         super(Route, self).__init__()
+
     def forward(self, x1, x2):
         out = torch.cat((x1, x2), dim=1)
         return out
@@ -82,19 +85,12 @@ class FPN_YOLO_V3(nn.Module):
 
         self.neck_1 = Feature_block(fi_0, 512, fo_0)
 
-
-
-        self.__conv0 = Convolutional(filters_in=512, filters_out=256, kernel_size=1, stride=1, padding=0,
-                                     batch_norm="bn", activate="leaky")
+        self.__conv0 = Convolutional(filters_in=512, filters_out=256, kernel_size=1, stride=1, padding=0,batch_norm="bn", activate="leaky")
         self.__upsample0 = Upsample(scale_factor=2)
         self.__route0 = Route()
         self.neck_2 = Feature_block((fi_1 + 256), 256, fo_1)
 
-
-
-
-        self.__conv1 = Convolutional(filters_in=256, filters_out=128, kernel_size=1, stride=1, padding=0,
-                                     batch_norm="bn", activate="leaky")
+        self.__conv1 = Convolutional(filters_in=256, filters_out=128, kernel_size=1, stride=1, padding=0,batch_norm="bn", activate="leaky")
         self.__upsample1 = Upsample(scale_factor=2)
         self.__route1 = Route()
         self.neck_3 = Feature_block((fi_2 + 128), 128, fo_2)
